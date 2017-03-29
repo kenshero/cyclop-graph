@@ -1,7 +1,17 @@
 {
-  "name": "cyclop",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": {},
-  "license": "MIT"
+  "name": "cyclop-graph",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "author": "kenshero",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kenshero/cyclop.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2017": "^6.22.0",
+    "webpack": "^2.3.2"
+  }
 }
