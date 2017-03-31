@@ -590,9 +590,9 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
 
-cyclop-graph@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/cyclop-graph/-/cyclop-graph-0.0.1.tgz#3f3dfbcbbc829553a9b2a8bcd84a0fe020629ec7"
+cyclop-graph@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/cyclop-graph/-/cyclop-graph-0.0.4.tgz#2bf0c46e29c0e5ade4b9a7113ab917f0babeae4b"
   dependencies:
     babel-core "^6.24.0"
     babel-loader "^6.4.1"
