@@ -1,6 +1,6 @@
 {
   "name": "cyclop-graph",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "lib/cyclop.js",
   "browser": "dist/cyclop.js",
   "author": "kenshero",
