@@ -6,7 +6,9 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'cyclop.js'
+    filename: 'cyclop.js',
+    library: 'Cyclop',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{
