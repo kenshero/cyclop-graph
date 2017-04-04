@@ -18,9 +18,13 @@
     "babel-loader": "^6.4.1",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-es2017": "^6.22.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
     "webpack": "^2.3.2"
   },
   "scripts": {
-    "build": "babel src -d lib -s "
+    "build": "babel src -d lib -s ",
+    "lint": "eslint src"
   }
 }
