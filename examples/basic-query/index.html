@@ -13,33 +13,30 @@
       })
 
       var queryDoc = `query {
-      products {
-        _id
-        name
-        price
-      }
-    }`
-
-    var mutateDoc = `
-      mutation {
-        addProduct(
-          name: $name,
-          price: $price,
-          category: $category
-        ) {
+        products {
           _id
           name
           price
-          category
         }
+      }`
+
+      var mutateDoc = `
+        mutation {
+          addProduct(
+            name: $name,
+            price: $price,
+            category: $category
+          ) {
+            _id
+            name
+            price
+            category
+          }
       }`
 
       client.query( queryDoc ).then()
       client.mutate( mutateDoc, variables ).then()
 
-
-      console.log(Cyclop)
-      console.log(Cyclop.sum(1, 3))
     </script>
 </body>
 </html>
