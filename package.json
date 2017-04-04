@@ -1,6 +1,7 @@
 {
   "name": "cyclop-graph",
   "version": "0.0.5",
+  "description": "Graphql client lightweight query and mutation",
   "main": "lib/cyclop.js",
   "browser": "dist/cyclop.js",
   "author": "kenshero",
@@ -23,13 +24,15 @@
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "faucet": "^0.0.1",
+    "np": "^2.13.1",
     "tape": "^4.6.3",
     "webpack": "^2.3.2"
   },
   "scripts": {
     "build": "babel src -d lib -s ",
     "lint": "eslint src && eslint test",
-    "test": "babel-tape-runner test/*.js | faucet"
+    "test": "babel-tape-runner test/*.js | faucet",
+    "release": "np"
   },
   "keywords": [
     "graphql",
