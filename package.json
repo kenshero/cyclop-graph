@@ -20,10 +20,12 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-es2017": "^6.22.0",
     "babel-tape-runner": "^2.0.1",
+    "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "faucet": "^0.0.1",
+    "istanbul": "^0.4.5",
     "np": "^2.13.1",
     "tape": "^4.6.3",
     "webpack": "^2.3.2"
@@ -32,10 +34,24 @@
     "build": "babel src -d lib -s ",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
-    "release": "np"
+    "release": "np",
+    "coverage": "istanbul cover babel-tape-runner test/*.js"
   },
   "keywords": [
     "graphql",
     "graphql-client"
-  ]
+  ],
+  "nyc": {
+    "include": [
+      "test/*.js"
+    ],
+    "extension": [
+      ".es6"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
 }
