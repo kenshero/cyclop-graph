@@ -1,6 +1,9 @@
 # Cyclop ! (In Progress. It still not working)
 
+https://travis-ci.org/kenshero/cyclop-graph.svg?branch=master
+
 ### Document Design
+
 
 That's it!
 
