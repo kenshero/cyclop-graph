@@ -1,6 +1,6 @@
 var path = require('path');
 module.exports = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     './src/cyclop'
   ],

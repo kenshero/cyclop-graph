@@ -6,17 +6,20 @@
 <body>
     <h1>Hello World</h1>
     <script src="../../dist/cyclop.js"></script>
+    <script src="../../dist/cyclop.js"></script>
     <script type="text/javascript">
-      var client = Cyclop.ConnectGraphql({
-        url: "",
+
+      var client = Cyclop.ConnectionGraphql({
+        url: "https://us-west-2.api.scaphold.io/graphql/cyclop",
         headers: ""
-      })
+      });
 
       var queryDoc = `query {
-        products {
+        getProducts {
           _id
           name
           price
+          category
         }
       }`
 
@@ -34,8 +37,28 @@
           }
       }`
 
-      client.query( queryDoc ).then()
-      client.mutate( mutateDoc, variables ).then()
+      var promise = new Promise(function(resolve, reject) {
+        client.query(queryDoc).then(function(response){
+          console.log(response);
+          var {data, errors} = response;
+          if (data) {
+            resolve(data);
+          }
+          else {
+            reject(Error(errors));
+          }
+        });
+      })
+      var data = promise.then(function(response){
+        console.log(response);
+        return response;
+      })
+
+      // console.log(client.query(queryDoc));
+
+      // client.query( queryDoc ).then()
+      // client.mutate( mutateDoc, variables ).then()
+
 
     </script>
 </body>
