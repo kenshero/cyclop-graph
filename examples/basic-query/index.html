@@ -6,16 +6,44 @@
 <body>
     <h1>Hello World</h1>
     <script src="../../dist/cyclop.js"></script>
-    <script src="../../dist/cyclop.js"></script>
     <script type="text/javascript">
 
-      var client = Cyclop.ConnectionGraphql({
-        url: "https://us-west-2.api.scaphold.io/graphql/cyclop",
+      var client = new Cyclop.ConnectionGraphql({
+        url: "http://localhost:3000/graphql",
+        headers: ""
+      });
+
+      var client2 = new Cyclop.ConnectionGraphql({
+        url: "http://localhost:3005/graphqlUser",
         headers: ""
       });
 
       var queryDoc = `query {
         getProducts {
+          _id
+          name
+          price
+          category
+        }
+        getProductByPrice(price: 2000) {
+          _id
+          name
+          price
+          category
+        }
+      }`
+
+      var queryPreprox = `query {
+        products {
+          _id
+          name
+          price
+        }
+      }`
+
+      var price = 2000;
+      var queryPrice = `query {
+        getProductByPrice(price: ${price}) {
           _id
           name
           price
@@ -37,24 +65,31 @@
           }
       }`
 
-      var promise = new Promise(function(resolve, reject) {
-        client.query(queryDoc).then(function(response){
-          console.log(response);
-          var {data, errors} = response;
-          if (data) {
-            resolve(data);
-          }
-          else {
-            reject(Error(errors));
-          }
+      graphFetch(client, queryDoc);
+      graphFetch(client2, queryPreprox);
+      graphFetch(client, queryPrice);
+
+      function graphFetch(client, doc) {
+        var promise = new Promise(function(resolve, reject) {
+          client.query(doc).then(function(response){
+            var {data, errors} = response;
+            if (data) {
+              resolve(data);
+            }
+            else {
+              reject(Error(errors));
+            }
+          });
         });
-      })
-      var data = promise.then(function(response){
-        console.log(response);
-        return response;
-      })
+        promise.then(function(response){
+          console.log("client : ", client);
+          console.log(response);
+          return response;
+        });
+      }
 
       // console.log(client.query(queryDoc));
+      // console.log(client2.query(queryDoc));
 
       // client.query( queryDoc ).then()
       // client.mutate( mutateDoc, variables ).then()

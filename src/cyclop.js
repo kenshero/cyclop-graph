@@ -1,9 +1,10 @@
 import 'whatwg-fetch';
 
-const fetchData = async (doc) => {
+
+const fetchData = async (doc, url) => {
   let queryData;
   try {
-    const response = await fetch('http://localhost:3000/graphql', {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/graphql'
@@ -14,34 +15,33 @@ const fetchData = async (doc) => {
   } catch(errors) {
     console.error(errors);
   }
+  console.log(url);
   return queryData;
 }
 
-const queryStation = async (doc, variables=null) => {
-  let queryStationData;
-  if(variables) {
-  } else {
-    queryStationData = await fetchData(doc)
-  }
-  return queryStationData;
-}
+// const queryStation = async (doc, variables=null) => {
+//   let queryStationData;
+//   if(variables) {
+//   } else {
+//     queryStationData = await fetchData(doc)
+//   }
+//   return queryStationData;
+// }
 
-const mutation = (url, headers) => {
-  console.log(url);
-  console.log("aa");
-}
 
-export const ConnectionGraphql = (network) => {
-  console.log(network);
+export function ConnectionGraphql(network){
   const {url, headers} = network;
-
-  const method = {
-    query: queryStation,
-    mutate: mutation
-  };
-  return method
+  this.url = url;
+  this.headers = headers;
+  this.query = async function(doc, variables=null) {
+    let queryStationData;
+    if(variables) {
+    } else {
+      queryStationData = await fetchData(doc, this.url)
+    }
+    return queryStationData;
+  } // query
 }
-
 
 export const sum = (a, b) => {
   const sumTotal = a + b;
@@ -54,4 +54,3 @@ export const getPost = () => {
   });
 };
 
-export default sum;
