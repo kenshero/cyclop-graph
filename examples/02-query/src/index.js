@@ -1,34 +1,18 @@
-import Cyclop from 'cyclop-graph'
+import Cyclop from 'cyclop-graph';
+import { queryDoc, mutateDoc } from './documents';
 
-const client = Cyclop.ConnectGraphql({
-    url: "",
-    headers: ""
-})
+console.log(queryDoc);
+console.log(mutateDoc);
 
-var queryDoc = `query {
-products {
-  _id
-  name
-  price
-}
-}`
 
-var mutateDoc = `
-mutation {
-  addProduct(
-    name: $name,
-    price: $price,
-    category: $category
-  ) {
-    _id
-    name
-    price
-    category
-  }
-}`
+var client = Cyclop.ConnectionGraphql({
+  url: "http://localhost:3000/graphql",
+  headers: ""
+});
+
 
 client.query( queryDoc ).then()
-client.mutate( mutateDoc, variables ).then()
+client.mutate( mutateDoc ).then()
 
 
 console.log(sum(1, 4))

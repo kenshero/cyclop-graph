@@ -1,6 +1,50 @@
 import 'whatwg-fetch';
 
 
+const getVariblesSet = (doc) => {
+  const regExp = /\(([^)]+)\)/;
+  let matches = regExp.exec(doc);
+  return matches;
+}
+
+const mapDocWithVariables = (doc, variables) => {
+  let variablesSet = getVariblesSet(doc);
+  console.log(variablesSet);
+// `mutation {
+//   createOrder(order:{
+//     name: $name,
+//     price: $pirce,
+//     amount: $amount,
+//     category: $category,
+//     status: $status
+//   }) {
+//     _id
+//     name
+//     price
+//     amount
+//     category
+//     status
+//   }
+// }`
+
+
+
+
+// `query {
+//   getProductByPrice(price: $price) {
+//     _id
+//     name
+//     price
+//     category
+//   }
+// }`
+
+
+  console.log(doc);
+  console.log(variables);
+
+}
+
 const fetchData = async (doc, url) => {
   let queryData;
   try {
@@ -19,27 +63,19 @@ const fetchData = async (doc, url) => {
   return queryData;
 }
 
-// const queryStation = async (doc, variables=null) => {
-//   let queryStationData;
-//   if(variables) {
-//   } else {
-//     queryStationData = await fetchData(doc)
-//   }
-//   return queryStationData;
-// }
-
-
 export function ConnectionGraphql(network){
   const {url, headers} = network;
   this.url = url;
   this.headers = headers;
-  this.query = async function(doc, variables=null) {
-    let queryStationData;
+  this.query = async function(doc, variables = null) {
+    let queryData;
     if(variables) {
+      const newDoc = mapDocWithVariables(doc, variables)
+      console.log(newDoc);
     } else {
-      queryStationData = await fetchData(doc, this.url)
+      queryData = await fetchData(doc, this.url)
     }
-    return queryStationData;
+    return queryData;
   } // query
 }
 

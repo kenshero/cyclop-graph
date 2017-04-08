@@ -39,11 +39,23 @@
           name
           price
         }
+        product(product_id: $product_id) {
+          _id
+          name
+          price
+        }
+        order(order_name: $order_name) {
+          _id
+          name
+          price
+          amount
+          category
+          status
+        }
       }`
 
-      var price = 2000;
       var queryPrice = `query {
-        getProductByPrice(price: ${price}) {
+        getProductByPrice(price: $price) {
           _id
           name
           price
@@ -65,13 +77,35 @@
           }
       }`
 
+      var variables = [{
+        price: 2000
+      }]
+
       graphFetch(client, queryDoc);
-      graphFetch(client2, queryPreprox);
-      graphFetch(client, queryPrice);
+      graphFetchbyVariables(client, queryPrice, variables);
 
       function graphFetch(client, doc) {
         var promise = new Promise(function(resolve, reject) {
           client.query(doc).then(function(response){
+            var {data, errors} = response;
+            if (data) {
+              resolve(data);
+            }
+            else {
+              reject(Error(errors));
+            }
+          });
+        });
+        promise.then(function(response){
+          console.log("client : ", client);
+          console.log(response);
+          return response;
+        });
+      }
+
+      function graphFetchbyVariables(client, doc, variables) {
+        var promise = new Promise(function(resolve, reject) {
+          client.query(doc, variables).then(function(response){
             var {data, errors} = response;
             if (data) {
               resolve(data);
