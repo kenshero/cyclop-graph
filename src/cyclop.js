@@ -26,7 +26,8 @@ export function ConnectionGraphql(network){
   this.query = async function(doc, variables = null) {
     let queryData;
     if(variables) {
-      const newDoc = mapDocWithVariables(doc, variables)
+      const infoDoc = mapDocWithVariables(doc, variables)
+      queryData = await fetchData(infoDoc, this.url)
     } else {
       queryData = await fetchData(doc, this.url)
     }

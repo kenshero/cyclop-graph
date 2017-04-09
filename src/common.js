@@ -1,9 +1,8 @@
 export const mapDocWithVariables = (doc, variables) => {
-  let varsFromDocument = getVariblesFromDocument(doc);
-  let variablesSet = matchVar(varsFromDocument, variables);
-  console.log(variablesSet);
-  console.log(doc);
-  // let infoDoc = replaceVariablestoDoc(doc, variablesSet)
+  const varsFromDocument = getVariblesFromDocument(doc);
+  const variablesSet = matchVar(varsFromDocument, variables);
+  const infoDoc = replaceVariablestoDoc(doc, variablesSet)
+  return infoDoc;
 }
 
 const getVariblesFromDocument = (doc) => {
@@ -28,9 +27,19 @@ const matchVar = (varsFromDocument, variables) => {
 }
 
 const replaceVariablestoDoc = (doc, variablesSet) => {
-  console.log(doc);
-  console.log(variablesSet);
+  let infoDoc = doc;
+  const varsFromDocument = getVariblesFromDocument(doc);
+  for(let i = 0; i < variablesSet.length; i++) {
+    infoDoc = infoDoc.replace(varsFromDocument[i], variablesSet[i])
+  }
+  return infoDoc;
 }
+
+
+
+
+
+
 
 const processMapVars = (varsFromDocument, variables) => {
   const newVars = varsFromDocument.map( (varFromDoc, index) => {
@@ -45,10 +54,7 @@ const processMapVars = (varsFromDocument, variables) => {
 }
 
 
-
-
-
-function isMatchVars(varsFromDocument, variables) {
+const isMatchVars = (varsFromDocument, variables) => {
   for( let i = 0; i < varsFromDocument.length; i++) {
     const splitVarsFromDocument = varsFromDocument[i].split(",");
     const vars = Object.keys(variables[i]);
