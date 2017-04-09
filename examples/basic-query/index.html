@@ -61,6 +61,12 @@
           price
           category
         }
+        getProductByPrice(id: $id, price: $price) {
+          _id
+          name
+          price
+          category
+        }
       }`
 
       var mutateDoc = `
@@ -79,6 +85,10 @@
 
       var variables = [{
         price: 2000
+      },
+      {
+        id: "2222",
+        price: 1000
       }]
 
       graphFetch(client, queryDoc);
