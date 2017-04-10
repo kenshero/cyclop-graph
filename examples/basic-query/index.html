@@ -38,7 +38,7 @@
           name
           price
         }
-        order(order_name: $order_name) {
+        order(id: $id, order_name: $order_name) {
           _id
           name
           price
@@ -115,12 +115,6 @@
           return response;
         });
       }
-
-      // console.log(client.query(queryDoc));
-      // console.log(client2.query(queryDoc));
-
-      // client.query( queryDoc ).then()
-      // client.mutate( mutateDoc, variables ).then()
 
 
     </script>

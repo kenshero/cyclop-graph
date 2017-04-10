@@ -32,7 +32,8 @@
     "webpack": "^2.3.2"
   },
   "scripts": {
-    "build": "babel src -d lib -s ",
+    "build:es": "babel src -d lib -s ",
+    "build": "yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
     "release": "np",

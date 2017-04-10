@@ -1,8 +1,12 @@
-import test from 'tape';
-import { sum } from '../src/cyclop';
+import test from 'tape'
+import { ConnectionGraphql } from '../src/cyclop'
 
-test('test sum', (t) => {
-  const actual = sum(1, 4);
-  t.equal(actual, 5);
-  t.end();
+test('test ConnectionGraphql', (t) => {
+  const actual = new ConnectionGraphql({
+    url: 'http://localhost:3000/graphql',
+    headers: ''
+  });
+  const expected = { headers: '', url: 'http://localhost:3000/graphql' }
+  t.equal(actual.url, expected.url)
+  t.end()
 });
