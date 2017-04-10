@@ -5,5 +5,13 @@
     "extends": "airbnb-base",
     "plugins": [
         "import"
-    ]
+    ],
+    "rules": {
+      "no-plusplus": "off",
+      "import/prefer-default-export": "off",
+      "semi": "off",
+      "no-use-before-define": "off",
+      "no-throw-literal": "off",
+      "comma-dangle": "off"
+    }
 }
