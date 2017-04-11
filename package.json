@@ -32,28 +32,16 @@
     "webpack": "^2.3.2"
   },
   "scripts": {
-    "build:es": "babel src -d lib -s ",
-    "build": "yarn run lint && yarn run test",
+    "prepublish": "webpack && yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
     "release": "np",
     "coverage": "istanbul cover babel-tape-runner test/*.js"
   },
   "keywords": [
+    "cyclop",
+    "cyclop-graph",
     "graphql",
     "graphql-client"
-  ],
-  "nyc": {
-    "include": [
-      "test/*.js"
-    ],
-    "extension": [
-      ".es6"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  }
+  ]
 }
