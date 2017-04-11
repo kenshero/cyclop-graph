@@ -28,6 +28,7 @@ export const matchVar = (varsFromDocument, variables) => {
 
 export const replaceVariablestoDoc = (doc, variablesSet) => {
   let infoDoc = doc
+  console.log(variablesSet);
   const varsFromDocument = getVariblesFromDocument(doc)
   for (let i = 0; i < variablesSet.length; i++) {
     infoDoc = infoDoc.replace(varsFromDocument[i], variablesSet[i])
@@ -40,7 +41,8 @@ export const processMapVars = (varsFromDocument, variables) => {
     const keys = Object.keys(variables[index])
     let replaceVar = varFromDoc
     for (let i = 0; i < keys.length; i++) {
-      replaceVar = replaceVar.replace(`$${keys[i]}`, variables[index][keys[i]])
+      const varsToString = JSON.stringify(variables[index][keys[i]])
+      replaceVar = replaceVar.replace(`$${keys[i]}`, varsToString)
     }
     return replaceVar
   });

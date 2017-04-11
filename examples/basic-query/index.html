@@ -38,7 +38,7 @@
           name
           price
         }
-        order(id: $id, order_name: $order_name) {
+        order(order_name: $order_name) {
           _id
           name
           price
@@ -71,12 +71,20 @@
           }
       }`
 
-      var variables = [{
+      var variables1 = [{
         price: 2000
       }]
 
+      var variables2 = [{
+        product_id: "586a518097934b3a9e4aeaae"
+      },
+      {
+        order_name: "test woy"
+      }]
+
       graphFetch(client, queryDoc);
-      graphFetchbyVariables(client, queryPrice, variables);
+      graphFetchbyVariables(client2, queryPreprox, variables2);
+      graphFetchbyVariables(client, queryPrice, variables1);
 
       function graphFetch(client, doc) {
         var promise = new Promise(function(resolve, reject) {
