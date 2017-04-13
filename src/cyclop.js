@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 import { mapDocWithVariables } from './common'
 
 const fetchData = async (doc, url) => {
-  let queryData
+  let data
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -11,11 +11,11 @@ const fetchData = async (doc, url) => {
       },
       body: doc
     })
-    queryData = await response.json()
+    data = await response.json()
   } catch (errors) {
     console.error(errors)
   }
-  return queryData
+  return data
 }
 
 export function ConnectionGraphql(network) {
@@ -24,7 +24,7 @@ export function ConnectionGraphql(network) {
   this.headers = headers
   this.query = async function (doc, variables = null) {
     let queryData
-    if (variables) {
+    if (variables != null) {
       const infoDoc = mapDocWithVariables(doc, variables)
       queryData = await fetchData(infoDoc, this.url)
     } else {
@@ -32,4 +32,14 @@ export function ConnectionGraphql(network) {
     }
     return queryData
   } // query
+  this.mutate = async function(doc, variables = null) {
+    let queryData
+    if (variables != null) {
+      const infoDoc = mapDocWithVariables(doc, variables)
+      queryData = await fetchData(infoDoc, this.url)
+    } else {
+      throw 'Not Found Variables'
+    }
+    return queryData
+  } // mutate
 }

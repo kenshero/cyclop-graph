@@ -28,7 +28,6 @@ export const matchVar = (varsFromDocument, variables) => {
 
 export const replaceVariablestoDoc = (doc, variablesSet) => {
   let infoDoc = doc
-  console.log(variablesSet);
   const varsFromDocument = getVariblesFromDocument(doc)
   for (let i = 0; i < variablesSet.length; i++) {
     infoDoc = infoDoc.replace(varsFromDocument[i], variablesSet[i])
