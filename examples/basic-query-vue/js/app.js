@@ -47,12 +47,21 @@ var queryPrice = `query {
   }
 }`
 
-var mutateProductDoc = `mutation {
+var addProductDoc = `mutation {
   addProduct(
     name: $name,
     price: $price,
     category: $category
   ) {
+    _id
+    name
+    price
+    category
+  }
+}`
+
+var deleteProductDoc = `mutation {
+  deleteProduct(id: $product_id) {
     _id
     name
     price
@@ -94,8 +103,7 @@ var app = new Vue({
             price: parseInt(this.prouductPrice),
             category: this.prouductCategory.split(",")
         }]
-        client.mutate(mutateProductDoc, variables).then( gqlResult => {
-            console.log(gqlResult)
+        client.mutate(addProductDoc, variables).then( gqlResult => {
             const {errors, data} = gqlResult
             if (errors) {
               throw "Error : " + errors[0].message
@@ -106,13 +114,18 @@ var app = new Vue({
         });
     },
     deleteProduct: function(productID) {
-        const variables = {
-            id: productID
-        }
-        client.mutate(deleteProduct(variables)).then( gqlResult => {
-            this.getProducts()
+        const variables = [{
+          product_id: productID
+        }]
+        console.log(productID)
+        client.mutate(deleteProductDoc, variables).then( gqlResult => {
+          const {errors, data} = gqlResult
+          if (errors) {
+            throw "Error : " + errors[0].message
+          }
+          this.getProducts()
         }).catch( (error) => {
-            console.error(error)
+          console.error(error)
         });
     }
   }
