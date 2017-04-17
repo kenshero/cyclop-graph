@@ -1,6 +1,6 @@
 {
   "name": "cyclop-graph",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Graphql client lightweight query and mutation",
   "main": "lib/cyclop.js",
   "browser": "dist/cyclop.js",
