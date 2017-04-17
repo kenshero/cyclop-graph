@@ -38,12 +38,12 @@ export const replaceVariablestoDoc = (doc, variablesSet) => {
 export const processMapVars = (varsFromDocument, variables) => {
   const newVars = varsFromDocument.map((varFromDoc, index) => {
     const keys = Object.keys(variables[index])
-    let replaceVar = varFromDoc
+    let replaceValue = varFromDoc
     for (let i = 0; i < keys.length; i++) {
       const varsToString = JSON.stringify(variables[index][keys[i]])
-      replaceVar = replaceVar.replace(`$${keys[i]}`, varsToString)
+      replaceValue = replaceValue.replace(`$${keys[i]}`, varsToString)
     }
-    return replaceVar
+    return replaceValue
   });
   return newVars;
 }
