@@ -65,7 +65,7 @@ export const isMatchVars = (varsFromDocument, variables) => {
   return true;
 }
 
-export const findMatchVariable = (splitVarsFromDocument, vars) => {
-  var regx = new RegExp(vars + '[]?$');
-  return splitVarsFromDocument.search(regx);
+export const findMatchVariable = (splitVarsFromDocument, word) => {
+  const regx = new RegExp(`${word}[]?$`)
+  return splitVarsFromDocument.search(regx)
 }

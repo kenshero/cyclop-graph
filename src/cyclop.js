@@ -32,7 +32,7 @@ export function ConnectionGraphql(network) {
     }
     return queryData
   } // query
-  this.mutate = async function(doc, variables = null) {
+  this.mutate = async function (doc, variables = null) {
     let queryData
     if (variables != null) {
       const infoDoc = mapDocWithVariables(doc, variables)

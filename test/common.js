@@ -84,10 +84,10 @@ test('test findMatchVariable', (t) => {
   const varsFromDocument2 = 'price: $price2'
   // const varsFromDocument3 = 'price: 1$price'
   const varsFromDocument4 = 'price: 1$price3'
-  const actual = findMatchVariable(varsFromDocument, "price")
-  const actual2 = findMatchVariable(varsFromDocument2, "price")
-  // const actual3 = findMatchVariable(varsFromDocument3, "price")
-  const actual4 = findMatchVariable(varsFromDocument4, "price")
+  const actual = findMatchVariable(varsFromDocument, 'price')
+  const actual2 = findMatchVariable(varsFromDocument2, 'price')
+  // const actual3 = findMatchVariable(varsFromDocument3, 'price')
+  const actual4 = findMatchVariable(varsFromDocument4, 'price')
   t.equal(actual, 8)
   t.equal(actual2, -1)
   // t.equal(actual3, -1)
