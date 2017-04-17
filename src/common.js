@@ -45,7 +45,7 @@ export const processMapVars = (varsFromDocument, variables) => {
     }
     return replaceValue
   });
-  return newVars;
+  return newVars
 }
 
 export const isMatchVars = (varsFromDocument, variables) => {
@@ -62,7 +62,7 @@ export const isMatchVars = (varsFromDocument, variables) => {
       }
     }
   }
-  return true;
+  return true
 }
 
 export const findMatchVariable = (splitVarsFromDocument, word) => {
