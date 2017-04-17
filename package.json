@@ -26,7 +26,6 @@
     "eslint-plugin-import": "^2.2.0",
     "faucet": "^0.0.1",
     "istanbul": "^0.4.5",
-    "np": "^2.13.1",
     "tape": "^4.6.3",
     "webpack": "^2.3.2"
   },
@@ -34,8 +33,8 @@
     "prepublish": "webpack && yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
-    "release": "webpack && yarn run lint && yarn run test && np",
-    "coverage": "istanbul cover babel-tape-runner test/*.js"
+    "release": "yarn publish",
+    "coverage": "covert test/*.js"
   },
   "keywords": [
     "cyclop",
