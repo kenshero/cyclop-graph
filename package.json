@@ -34,7 +34,7 @@
     "prepublish": "webpack && yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
-    "release": "np",
+    "release": "webpack && yarn run lint && yarn run test && np",
     "coverage": "istanbul cover babel-tape-runner test/*.js"
   },
   "keywords": [
