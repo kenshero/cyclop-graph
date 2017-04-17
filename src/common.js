@@ -53,14 +53,19 @@ export const isMatchVars = (varsFromDocument, variables) => {
     const splitVarsFromDocument = varsFromDocument[i].split(',')
     const vars = Object.keys(variables[i])
     if (splitVarsFromDocument.length !== vars.length) {
-      throw new Error('Variable does not match.')
+      throw new Error('Variable length does not match.')
     }
     for (let n = 0; n < vars.length; n++) {
-      const searchWord = splitVarsFromDocument[n].includes(`$${vars[n]}`)
-      if (!searchWord) {
+      const searchWord = findMatchVariable(splitVarsFromDocument[n].trim(), vars[n])
+      if (searchWord === -1) {
         throw new Error(`'${vars[n]}' Variable and Document does not match.`)
       }
     }
   }
   return true;
+}
+
+export const findMatchVariable = (splitVarsFromDocument, vars) => {
+  var regx = new RegExp(vars + '[]?$');
+  return splitVarsFromDocument.search(regx);
 }

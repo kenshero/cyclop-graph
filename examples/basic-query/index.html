@@ -33,7 +33,7 @@
           name
           price
         }
-        product(product_id: $product_id) {
+        product(product_id: $product_id, product_price: $product_price2 ) {
           _id
           name
           price
@@ -76,7 +76,8 @@
       }]
 
       var variables2 = [{
-        product_id: "586a518097934b3a9e4aeaae"
+        product_id: "586a518097934b3a9e4aeaae",
+        product_price: 3333
       },
       {
         order_name: "test woy"
@@ -99,8 +100,6 @@
           });
         });
         promise.then(function(response){
-          console.log("client : ", client);
-          console.log(response);
           return response;
         });
       }
@@ -118,8 +117,6 @@
           });
         });
         promise.then(function(response){
-          console.log("client : ", client);
-          console.log(response);
           return response;
         });
       }
