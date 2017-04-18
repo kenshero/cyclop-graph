@@ -1,4 +1,9 @@
-var app = new Vue({
+import { client } from './cyclopconf'
+import { queryDoc, queryPreprox, queryPrice, addProductDoc, deleteProductDoc} from './documents'
+
+console.log(client)
+
+const app = new Vue({
   el: '#app',
   data: {
     prouductName: "",
