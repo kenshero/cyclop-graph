@@ -18,7 +18,7 @@ const fetchData = async (doc, url) => {
   return data
 }
 
-export function ConnectionGraphql(network) {
+export function CyclopConnection(network) {
   const { url, headers } = network
   this.url = url
   this.headers = headers

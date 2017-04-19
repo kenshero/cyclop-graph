@@ -2,126 +2,106 @@
 <html>
 <head>
     <title>Basic Query Cyclop</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+    <script src="../../dist/cyclop.js"></script>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <script src="../../dist/cyclop.js"></script>
-    <script type="text/javascript">
 
-      var client = new Cyclop.ConnectionGraphql({
-        url: "http://localhost:3000/graphql",
-        headers: ""
-      });
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Hello CyClop
+      </h1>
+    </div>
+  </div>
+</section>
 
-      var client2 = new Cyclop.ConnectionGraphql({
-        url: "http://localhost:3005/graphqlUser",
-        headers: ""
-      });
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><abbr title="Position">No</abbr></th>
+        <th><abbr title="Played">Name</abbr></th>
+        <th><abbr title="Won">Price</abbr></th>
+        <th><abbr title="Drawn">Category</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>1</th>
+        <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
+        </td>
+        <td>38</td>
+        <td>23</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
+        </td>
+        <td>38</td>
+        <td>23</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-      var queryDoc = `query {
-        getProducts {
-          _id
-          name
-          price
-          category
-        }
-      }`
+<script type="text/javascript">
+  var client = new Cyclop.ConnectionGraphql({
+    url: "http://localhost:3000/graphql",
+    headers: ""
+  });
 
-      var queryPreprox = `query {
-        products {
-          _id
-          name
-          price
-        }
-        product(product_id: $product_id, product_price: $product_price2 ) {
-          _id
-          name
-          price
-        }
-        order(order_name: $order_name) {
-          _id
-          name
-          price
-          amount
-          category
-          status
-        }
-      }`
+  var queryDoc = `query {
+    getProducts {
+      _id
+      name
+      price
+      category
+    }
+  }`
 
-      var queryPrice = `query {
-        getProductByPrice(price: $price) {
-          _id
-          name
-          price
-          category
-        }
-      }`
+  var queryPrice = `query {
+    getProductByPrice(price: $price) {
+      _id
+      name
+      price
+      category
+    }
+  }`
 
-      var mutateDoc = `
-        mutation {
-          addProduct(
-            name: $name,
-            price: $price,
-            category: $category
-          ) {
-            _id
-            name
-            price
-            category
-          }
-      }`
-
-      var variables1 = [{
-        price: 2000
-      }]
-
-      var variables2 = [{
-        product_id: "586a518097934b3a9e4aeaae",
-        product_price: 3333
-      },
-      {
-        order_name: "test woy"
-      }]
-
-      graphFetch(client, queryDoc);
-      graphFetchbyVariables(client2, queryPreprox, variables2);
-      graphFetchbyVariables(client, queryPrice, variables1);
-
-      function graphFetch(client, doc) {
-        var promise = new Promise(function(resolve, reject) {
-          client.query(doc).then(function(response){
-            var {data, errors} = response;
-            if (data) {
-              resolve(data);
-            }
-            else {
-              reject(Error(errors));
-            }
-          });
-        });
-        promise.then(function(response){
-          return response;
-        });
+  var mutateDoc = `
+    mutation {
+      addProduct(
+        name: $name,
+        price: $price,
+        category: $category
+      ) {
+        _id
+        name
+        price
+        category
       }
+  }`
 
-      function graphFetchbyVariables(client, doc, variables) {
-        var promise = new Promise(function(resolve, reject) {
-          client.query(doc, variables).then(function(response){
-            var {data, errors} = response;
-            if (data) {
-              resolve(data);
-            }
-            else {
-              reject(Error(errors));
-            }
-          });
-        });
-        promise.then(function(response){
-          return response;
-        });
-      }
+  var variables = [{
+    price: 2000
+  }]
 
+  client.query(queryDoc).then(function(response){
+    var {data, errors} = response;
+    if (errors) {
+    }
+    console.log(data)
+  });
 
-    </script>
+  client.query(queryPrice, variables).then(function(response){
+    var {data, errors} = response;
+    if (errors) {
+    }
+    console.log(data)
+  });
+</script>
+
 </body>
 </html>
