@@ -40,16 +40,20 @@ var app = new Vue({
     prouductName: "",
     prouductPrice: "",
     prouductCategory: "",
-    products: []
+    products: [],
+    isError: false,
+    errorMsg: ""
   },
   methods: {
     getProducts: function() {
       client.query(queryDoc).then( response => {
         const {errors, data} = response
         if (errors) {
-          console.log(errors)
+          this.isError = true
+          this.errorMsg = errors[0].message
           throw "Error : " + errors[0].message
         }
+        this.isError = false
         this.products = data.getProducts
       }).catch( (error) => {
         console.error(error)
@@ -64,9 +68,11 @@ var app = new Vue({
       client.mutate(addProductDoc, variables).then( response => {
         const {errors, data} = response
         if (errors) {
-          console.log(errors)
+          this.isError = true
+          this.errorMsg = errors[0].message
           throw "Error : " + errors[0].message
         }
+        this.isError = false
         this.getProducts()
       }).catch( (error) => {
         console.error(error)
@@ -80,9 +86,11 @@ var app = new Vue({
       client.mutate(deleteProductDoc, variables).then( response => {
         const {errors, data} = response
         if (errors) {
-          console.log(errors)
+          this.isError = true
+          this.errorMsg = errors[0].message
           throw "Error : " + errors[0].message
         }
+        this.isError = false
         this.getProducts()
       }).catch( (error) => {
         console.error(error)

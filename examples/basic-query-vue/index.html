@@ -17,11 +17,9 @@
         </div>
       </div>
     </section>
-    <div class="notification is-danger">
+    <div class="notification is-danger" v-if="isError">
       <button class="delete"></button>
-      Danger lorem ipsum dolor sit amet, consectetur
-      adipiscing elit lorem ipsum dolor sit amet,
-      consec
+      {{ this.errorMsg }}
     </div>
     <section class="hero">
       <div class="hero-body">
