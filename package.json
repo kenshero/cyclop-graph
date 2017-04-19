@@ -11,6 +11,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "np": "^2.13.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
@@ -33,7 +34,7 @@
     "prepublish": "webpack && yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
-    "release": "webpack && yarn run lint && yarn run test && yarn publish",
+    "release": "np",
     "coverage": "covert test/*.js"
   },
   "keywords": [
