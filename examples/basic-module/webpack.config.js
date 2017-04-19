@@ -2,7 +2,7 @@ var path = require('path');
 module.exports = {
   devtool: 'eval',
   entry: [
-    './js/app'
+    './src/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -12,7 +12,7 @@ module.exports = {
     rules: [{
         test: /\.js$/,
         use: ['babel-loader'],
-        include: path.join(__dirname, 'js')
+        include: path.join(__dirname, 'src')
       }
     ]
   }

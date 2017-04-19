@@ -1,7 +1,5 @@
 import { client } from './cyclopconf'
-import { queryDoc, queryPreprox, queryPrice, addProductDoc, deleteProductDoc} from './documents'
-
-console.log(client)
+import { queryDoc, addProductDoc, deleteProductDoc} from './documents'
 
 const app = new Vue({
   el: '#app',
@@ -9,12 +7,20 @@ const app = new Vue({
     prouductName: "",
     prouductPrice: "",
     prouductCategory: "",
-    products: []
+    products: [],
+    isError: false,
+    errorMsg: ""
   },
   methods: {
     getProducts: function() {
-      client.query(queryDoc).then( gqlResult => {
-        const {errors, data} = gqlResult
+      client.query(queryDoc).then( response => {
+        const {errors, data} = response
+        if (errors) {
+          this.isError = true
+          this.errorMsg = errors[0].message
+          throw "Error : " + errors[0].message
+        }
+        this.isError = false
         this.products = data.getProducts
       }).catch( (error) => {
         console.error(error)
@@ -26,11 +32,14 @@ const app = new Vue({
         price: parseInt(this.prouductPrice),
         category: this.prouductCategory.split(",")
       }]
-      client.mutate(addProductDoc, variables).then( gqlResult => {
-        const {errors, data} = gqlResult
+      client.mutate(addProductDoc, variables).then( response => {
+        const {errors, data} = response
         if (errors) {
+          this.isError = true
+          this.errorMsg = errors[0].message
           throw "Error : " + errors[0].message
         }
+        this.isError = false
         this.getProducts()
       }).catch( (error) => {
         console.error(error)
@@ -41,11 +50,14 @@ const app = new Vue({
         product_id: productID
       }]
       console.log(productID)
-      client.mutate(deleteProductDoc, variables).then( gqlResult => {
-        const {errors, data} = gqlResult
+      client.mutate(deleteProductDoc, variables).then( response => {
+        const {errors, data} = response
         if (errors) {
+          this.isError = true
+          this.errorMsg = errors[0].message
           throw "Error : " + errors[0].message
         }
+        this.isError = false
         this.getProducts()
       }).catch( (error) => {
         console.error(error)

@@ -2,106 +2,108 @@
 <html>
 <head>
     <title>Basic Query Cyclop</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
-    <script src="../../dist/cyclop.js"></script>
 </head>
+    <script src="../../dist/cyclop.js"></script>
+    <script src="./js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
 <body>
-
-<section class="hero is-info">
-  <div class="hero-body">
+  <div id="app">
+    <section class="hero is-info">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Hello CyClop
+          </h1>
+        </div>
+      </div>
+    </section>
+    <div class="notification is-danger" v-if="isError">
+      <button class="delete"></button>
+      {{ this.errorMsg }}
+    </div>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Name</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <input class="input" type="text" v-model="prouductName" placeholder="product name">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Price</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <input class="input" type="text" v-model="prouductPrice" placeholder="x,xxx">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Category</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <input class="input" type="text" v-model="prouductCategory" placeholder="Separate by Comma (,)">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <!-- Left empty for spacing -->
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <button class="button is-success" v-on:click="addProduct">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="container">
-      <h1 class="title">
-        Hello CyClop
-      </h1>
+      <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(product, index) in products">
+              <td>{{ index +1 }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.category }}</td>
+              <td>
+                <button class="button is-danger" v-on:click="deleteProduct(product._id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</section>
-
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th><abbr title="Position">No</abbr></th>
-        <th><abbr title="Played">Name</abbr></th>
-        <th><abbr title="Won">Price</abbr></th>
-        <th><abbr title="Drawn">Category</abbr></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>1</th>
-        <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
-        </td>
-        <td>38</td>
-        <td>23</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
-        </td>
-        <td>38</td>
-        <td>23</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<script type="text/javascript">
-  var client = new Cyclop.ConnectionGraphql({
-    url: "http://localhost:3000/graphql",
-    headers: ""
-  });
-
-  var queryDoc = `query {
-    getProducts {
-      _id
-      name
-      price
-      category
-    }
-  }`
-
-  var queryPrice = `query {
-    getProductByPrice(price: $price) {
-      _id
-      name
-      price
-      category
-    }
-  }`
-
-  var mutateDoc = `
-    mutation {
-      addProduct(
-        name: $name,
-        price: $price,
-        category: $category
-      ) {
-        _id
-        name
-        price
-        category
-      }
-  }`
-
-  var variables = [{
-    price: 2000
-  }]
-
-  client.query(queryDoc).then(function(response){
-    var {data, errors} = response;
-    if (errors) {
-    }
-    console.log(data)
-  });
-
-  client.query(queryPrice, variables).then(function(response){
-    var {data, errors} = response;
-    if (errors) {
-    }
-    console.log(data)
-  });
-</script>
-
+    <script src="./js/app.js"></script>
 </body>
 </html>
