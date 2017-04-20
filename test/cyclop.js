@@ -1,8 +1,8 @@
 import test from 'tape'
-import { ConnectionGraphql } from '../src/cyclop'
+import { CyclopConnection } from '../src/cyclop'
 
-test('test ConnectionGraphql', (t) => {
-  const actual = new ConnectionGraphql({
+test('test CyclopConnection', (t) => {
+  const actual = new CyclopConnection({
     url: 'http://localhost:3000/graphql',
     headers: ''
   });

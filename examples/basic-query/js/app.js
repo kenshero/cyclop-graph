@@ -1,4 +1,4 @@
-var client = new Cyclop.ConnectionGraphql({
+var client = new Cyclop.CyclopConnection({
   url: "http://localhost:3000/graphql",
   headers: ""
 });
