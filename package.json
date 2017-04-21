@@ -4,6 +4,7 @@
   "description": "Graphql client lightweight query and mutation",
   "main": "lib/cyclop.js",
   "browser": "dist/cyclop.js",
+  "unpkg": "dist/cyclop.js",
   "author": "kenshero",
   "repository": {
     "type": "git",

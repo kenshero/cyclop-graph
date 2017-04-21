@@ -1,20 +1,34 @@
 # Cyclop ! (In Progress. It still not working)
+Cyclop is a GraphQL client. ** Cyclop use Content-Type : application/graphql only **
 
 [![Build Status](https://travis-ci.org/kenshero/cyclop-graph.svg?branch=master)](https://travis-ci.org/kenshero/cyclop-graph)
 
-### Document Design
 
+### Installation
 
-That's it!
+install with npm or yarn
+```
+npm install --save cyclop-graph
+// or
+yarn add cyclop-graph
+```
 
-```js
+install in a browser.
+`<script type="text/javascript" src="https://unpkg.com/cyclop-graph@0.1.8/dist/cyclop.js"></script>`
 
-var client = new Cyclop.ConnectionGraphql({
+# Basic Usage
+
+### Query
+module bundler style
+```
+import { CyclopConnection } from 'cyclop-graph'
+
+const client = new CyclopConnection({
   url: "http://localhost:3000/graphql",
   headers: ""
-});
+})
 
-var queryDoc = `query {
+const documentExam = `query {
   getProducts {
     _id
     name
@@ -23,7 +37,80 @@ var queryDoc = `query {
   }
 }`
 
-var addProductDoc = `mutation {
+client.query(documentExam).then( response => {
+  const {errors, data} = response
+}).catch( (error) => {
+
+});
+
+```
+
+Vanilla Style
+```html
+<script type="text/javascript">
+
+var client = new Cyclop.CyclopConnection({
+  url: "http://localhost:3000/graphql",
+  headers: ""
+});
+
+var documentExam = `query {
+  getProducts {
+    _id
+    name
+    price
+    category
+  }
+}`
+
+client.query(documentExam).then( response => {
+  console.log(response);
+}).catch( (error) => {
+
+});
+
+</script>
+```
+
+### Query With Variables
+```
+import { CyclopConnection } from 'cyclop-graph'
+
+const client = new CyclopConnection({
+  url: "http://localhost:3000/graphql",
+  headers: ""
+})
+
+const documentExam = `query {
+  getProductByPrice(price : $price) {
+    _id
+    name
+    price
+    category
+  }
+}`
+
+const variables = [{
+  price: 2000,
+}]
+
+client.query(documentExam, variables).then( response => {
+  const {errors, data} = response
+}).catch( (error) => {
+
+});
+```
+
+### Mutation
+```
+import { CyclopConnection } from 'cyclop-graph'
+
+const client = new CyclopConnection({
+  url: "http://localhost:3000/graphql",
+  headers: ""
+})
+
+const addProductDoc = `mutation {
   addProduct(
     name: $name,
     price: $price,
@@ -36,85 +123,18 @@ var addProductDoc = `mutation {
   }
 }`
 
-var deleteProductDoc = `mutation {
-  deleteProduct(id: $product_id) {
-    _id
-    name
-    price
-    category
-  }
-}`
+const variables = [{
+  name: "Ninetendo Switch",
+  price: $299.99,
+  category: ["game", "handheld"]
+}]
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    prouductName: "",
-    prouductPrice: "",
-    prouductCategory: "",
-    products: [],
-    isError: false,
-    errorMsg: ""
-  },
-  methods: {
-    getProducts: function() {
-      client.query(queryDoc).then( response => {
-        const {errors, data} = response
-        if (errors) {
-          this.isError = true
-          this.errorMsg = errors[0].message
-          throw "Error : " + errors[0].message
-        }
-        this.isError = false
-        this.products = data.getProducts
-      }).catch( (error) => {
-        console.error(error)
-      });
-    },
-    addProduct: function() {
-      const variables = [{
-        name: this.prouductName,
-        price: parseInt(this.prouductPrice),
-        category: this.prouductCategory.split(",")
-      }]
-      client.mutate(addProductDoc, variables).then( response => {
-        const {errors, data} = response
-        if (errors) {
-          this.isError = true
-          this.errorMsg = errors[0].message
-          throw "Error : " + errors[0].message
-        }
-        this.isError = false
-        this.getProducts()
-      }).catch( (error) => {
-        console.error(error)
-      });
-    },
-    deleteProduct: function(productID) {
-      const variables = [{
-        product_id: productID
-      }]
-      console.log(productID)
-      client.mutate(deleteProductDoc, variables).then( response => {
-        const {errors, data} = response
-        if (errors) {
-          this.isError = true
-          this.errorMsg = errors[0].message
-          throw "Error : " + errors[0].message
-        }
-        this.isError = false
-        this.getProducts()
-      }).catch( (error) => {
-        console.error(error)
-      });
-    }
-  }
-})
+client.query(addProductDoc, variables).then( response => {
+  const {errors, data} = response
+}).catch( (error) => {
 
-app.getProducts()
-
+});
 ```
-
-
 ### License
 
 MIT
