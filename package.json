@@ -2,7 +2,7 @@
   "name": "cyclop-graph",
   "version": "0.1.8",
   "description": "Graphql client lightweight query and mutation",
-  "main": "lib/cyclop.js",
+  "main": "src/cyclop.js",
   "browser": "dist/cyclop.js",
   "unpkg": "dist/cyclop.js",
   "author": "kenshero",
@@ -43,5 +43,8 @@
     "cyclop-graph",
     "graphql",
     "graphql-client"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/kenshero/cyclop-graph/issues"
+  },
 }
