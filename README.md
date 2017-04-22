@@ -129,11 +129,12 @@ const variables = [{
   category: ["game", "handheld"]
 }]
 
-client.query(addProductDoc, variables).then( response => {
-  const {errors, data} = response
+client.mutate(addProductDoc, variables).then( response => {
+  console.log(response)
 }).catch( (error) => {
 
 });
+
 ```
 ### License
 
