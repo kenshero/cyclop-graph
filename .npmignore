@@ -2,4 +2,3 @@ examples
 .babelrc
 npm-debug.log
 coverage
-lib
