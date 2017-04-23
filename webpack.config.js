@@ -1,4 +1,7 @@
+var webpack = require('webpack');
 var path = require('path');
+var PROD = (process.env.NODE_ENV === 'production')
+
 module.exports = {
   devtool: 'source-map',
   entry: [
@@ -6,7 +9,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'cyclop.js',
+    filename: PROD ? 'cyclop.min.js' : 'cyclop.js',
     library: 'Cyclop',
     libraryTarget: 'umd'
   },
@@ -17,5 +20,11 @@ module.exports = {
         include: path.join(__dirname, 'src')
       }
     ]
-  }
+  },
+  plugins: PROD ? [
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    })
+  ] : []
 };

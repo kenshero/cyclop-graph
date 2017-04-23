@@ -2,7 +2,7 @@
   "name": "cyclop-graph",
   "version": "0.1.9",
   "description": "Graphql client lightweight query and mutation",
-  "main": "src/cyclop.js",
+  "main": "lib/cyclop.js",
   "browser": "dist/cyclop.js",
   "unpkg": "dist/cyclop.js",
   "author": "kenshero",
@@ -12,10 +12,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "np": "^2.13.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -28,13 +28,18 @@
     "eslint-plugin-import": "^2.2.0",
     "faucet": "^0.0.1",
     "istanbul": "^0.4.5",
+    "np": "^2.13.2",
     "tape": "^4.6.3",
     "webpack": "^2.3.2"
   },
   "scripts": {
-    "prepublish": "webpack && yarn run lint && yarn run test",
+    "prepublish": "yarn run build && yarn run lint && yarn run test",
     "lint": "eslint src && eslint test",
     "test": "babel-tape-runner test/*.js | faucet",
+    "build:commonjs": "babel src --out-dir lib",
+    "build:umd": "webpack",
+    "build:umd:min": "NODE_ENV=production webpack",
+    "build": "yarn run build:commonjs && yarn run build:umd && yarn run build:umd:min",
     "release": "np",
     "coverage": "covert test/*.js"
   },
