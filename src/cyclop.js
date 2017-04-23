@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import fetch from 'unfetch'
 import { mapDocWithVariables } from './common'
 
 const fetchData = async (doc, url) => {
