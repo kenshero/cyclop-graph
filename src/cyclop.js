@@ -1,4 +1,4 @@
-import fetch from 'unfetch'
+import fetch from 'isomorphic-unfetch'
 import { mapDocWithVariables } from './common'
 
 const fetchData = async (doc, url) => {
