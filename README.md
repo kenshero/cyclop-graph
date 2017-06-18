@@ -1,4 +1,4 @@
-# Cyclop ! (In Progress. It still not working)
+# Cyclop
 Cyclop is a GraphQL client. ** Cyclop use Content-Type : application/graphql only **
 
 [![Build Status](https://travis-ci.org/kenshero/cyclop-graph.svg?branch=master)](https://travis-ci.org/kenshero/cyclop-graph)
@@ -14,7 +14,10 @@ yarn add cyclop-graph
 ```
 
 install in a browser.
-`<script type="text/javascript" src="https://unpkg.com/cyclop-graph@0.1.8/dist/cyclop.js"></script>`
+
+```
+<script type="text/javascript" src="https://unpkg.com/cyclop-graph@0.1.8/dist/cyclop.js"></script>
+```
 
 # Basic Usage
 
