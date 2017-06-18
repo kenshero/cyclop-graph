@@ -1,14 +1,16 @@
 import fetch from 'isomorphic-unfetch'
 import { mapDocWithVariables } from './common'
 
-const fetchData = async (doc, url) => {
+const fetchData = async (doc, url, customHeaders) => {
   let data
+  const defaultHeaders = {
+    'Content-Type': 'application/graphql'
+  }
+  const headers = Object.assign(defaultHeaders, customHeaders)
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/graphql'
-      },
+      headers,
       body: doc
     })
     data = await response.json()
@@ -26,9 +28,9 @@ export function CyclopConnection(network) {
     let queryData
     if (variables != null) {
       const infoDoc = mapDocWithVariables(doc, variables)
-      queryData = await fetchData(infoDoc, this.url)
+      queryData = await fetchData(infoDoc, this.url, this.headers)
     } else {
-      queryData = await fetchData(doc, this.url)
+      queryData = await fetchData(doc, this.url, this.headers)
     }
     return queryData
   } // query
@@ -36,7 +38,7 @@ export function CyclopConnection(network) {
     let queryData
     if (variables != null) {
       const infoDoc = mapDocWithVariables(doc, variables)
-      queryData = await fetchData(infoDoc, this.url)
+      queryData = await fetchData(infoDoc, this.url, this.headers)
     } else {
       throw 'Not Found Variables'
     }

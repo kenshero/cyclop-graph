@@ -25,7 +25,9 @@ import { CyclopConnection } from 'cyclop-graph'
 
 const client = new CyclopConnection({
   url: "http://localhost:3000/graphql",
-  headers: ""
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
 })
 
 const documentExam = `query {
@@ -51,7 +53,9 @@ Vanilla Style
 
 var client = new Cyclop.CyclopConnection({
   url: "http://localhost:3000/graphql",
-  headers: ""
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
 });
 
 var documentExam = `query {
@@ -78,7 +82,9 @@ import { CyclopConnection } from 'cyclop-graph'
 
 const client = new CyclopConnection({
   url: "http://localhost:3000/graphql",
-  headers: ""
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
 })
 
 const documentExam = `query {
@@ -107,7 +113,9 @@ import { CyclopConnection } from 'cyclop-graph'
 
 const client = new CyclopConnection({
   url: "http://localhost:3000/graphql",
-  headers: ""
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
 })
 
 const addProductDoc = `mutation {

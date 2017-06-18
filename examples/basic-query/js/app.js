@@ -1,6 +1,8 @@
 var client = new Cyclop.CyclopConnection({
   url: "http://localhost:3000/graphql",
-  headers: ""
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
 });
 
 var queryDoc = `query {
