@@ -1,5 +1,5 @@
 # Cyclop
-Cyclop is a GraphQL client. ** Cyclop use Content-Type : application/graphql only **
+Cyclop is a GraphQL client. **Cyclop use Content-Type : application/graphql only**
 
 [![Build Status](https://travis-ci.org/kenshero/cyclop-graph.svg?branch=master)](https://travis-ci.org/kenshero/cyclop-graph)
 
@@ -147,6 +147,57 @@ client.mutate(addProductDoc, variables).then( response => {
 });
 
 ```
+
+
+### Multiple Documents
+
+Variables must match documents.
+```
+import { CyclopConnection } from 'cyclop-graph'
+
+const client = new CyclopConnection({
+  url: "http://localhost:3000/graphql",
+  headers: {
+    Authorization: 'Bearer ' + token
+  }
+})
+
+const addProductDoc = `mutation {
+  addProduct(
+    name: $name,
+    price: $price,
+    category: $category
+  ) {
+    _id
+    name
+    price
+    category
+  }
+  getTagsByCategory(
+    category: $category
+  ) {
+    _id
+    name
+    category
+  }
+}`
+
+const variables = [{
+  name: "Ninetendo Switch",
+  price: $299.99,
+  category: ["game", "handheld"]
+}, {
+  category: "game"
+}]
+
+client.mutate(addProductDoc, variables).then( response => {
+  console.log(response)
+}).catch( (error) => {
+
+});
+
+```
+
 ### License
 
 MIT
