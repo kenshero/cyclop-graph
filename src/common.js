@@ -40,7 +40,7 @@ export const processMapVars = (varsFromDocument, variables) => {
     const keys = Object.keys(variables[index])
     let replaceValue = varFromDoc
     for (let i = 0; i < keys.length; i++) {
-      if(typeof variables[index][keys[i]] === 'object') {
+      if (typeof variables[index][keys[i]] === 'object') {
         const varsToString = JsonToJsObj(variables[index][keys[i]])
         replaceValue = replaceValue.replace(`$${keys[i]}`, varsToString)
       } else {
@@ -73,22 +73,21 @@ export const isMatchVars = (varsFromDocument, variables) => {
 export const JsonToJsObj = (jsonData) => {
   // const removeDoubleQuoteOfKey = /"[\w+]+"\:/g;
   let jsonStrData = JSON.stringify(jsonData)
-  if(jsonData.length){
-    for(let i in jsonData) {
-      const obj = jsonData[i]
-      const objKeys = Object.keys(obj)
-      for(let i in objKeys) {
-        const regexStr = `"${objKeys[i]}"\:`
-        jsonStrData = jsonStrData.replace(new RegExp(regexStr, 'g'), `${objKeys[i]}:`);
-      }
-    }
+  if (jsonData.length) {
+    jsonData.forEach((data) => {
+      const objKeys = Object.keys(data)
+      objKeys.forEach((key) => {
+        const regexStr = `"${key}":`
+        jsonStrData = jsonStrData.replace(new RegExp(regexStr, 'g'), `${key}:`);
+      })
+    })
     return jsonStrData
   }
   const objKeys = Object.keys(jsonData)
-  for(let i in objKeys) {
-    const regexStr = `"${objKeys[i]}"\:`
-    jsonStrData = jsonStrData.replace(new RegExp(regexStr, 'g'), `${objKeys[i]}:`);
-  }
+  objKeys.forEach((key) => {
+    const regexStr = `"${key}":`
+    jsonStrData = jsonStrData.replace(new RegExp(regexStr, 'g'), `${key}:`);
+  })
   return jsonStrData
 }
 

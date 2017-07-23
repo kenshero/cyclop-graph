@@ -26,12 +26,12 @@ test('test mapDocWithVariables Single Field', (t) => {
   t.end()
 });
 
-// test('test mapDocWithVariables Single Field Test Var Object', (t) => {
-//   const actual = mapDocWithVariables(queryImages, queryImagesVars)
-//   const expected = 'query {\n  getImages(images: [{name: "test_name", url: "www.xxxx.yyy"}]) {\n    _id\n    images  }\n}'
-//   t.equal(actual, expected)
-//   t.end()
-// });
+test('test mapDocWithVariables Single Field Test Var Object', (t) => {
+  const actual = mapDocWithVariables(queryImages, queryImagesVars)
+  const expected = 'query {\n  getImages(images: [{name:"test_name",url:"www.xxxx.yyy"}]) {\n    _id\n    images\n  }\n}'
+  t.equal(actual, expected)
+  t.end()
+});
 
 test('test mapDocWithVariables Multiple Field', (t) => {
   const actual = mapDocWithVariables(queryProductAndOrder, queryProductAndOrderVars)
@@ -91,7 +91,6 @@ test('test processMapVars type Object', (t) => {
 });
 
 test('test JsonToJsObj', (t) => {
-  // const jsonData = JSON.stringify([{name:"test_name",url:"www.xxxx.yyy"}])
   const jsonData = {name:"test_name",url:"www.xxxx.yyy"}
   const actual = JsonToJsObj(jsonData)
   const expected = `{name:"test_name",url:"www.xxxx.yyy"}`

@@ -36,7 +36,7 @@
   "scripts": {
     "dev": "webpack -w",
     "prepublish": "yarn run build && yarn run lint && yarn run test",
-    "lint": "eslint src && eslint test",
+    "lint": "eslint src",
     "test": "babel-tape-runner test/*.js | faucet",
     "build:commonjs": "babel src --out-dir lib",
     "build:dev": "webpack",
