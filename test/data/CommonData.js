@@ -2,6 +2,13 @@ export const queryPriceVars = [{
   price: 2000
 }]
 
+export const queryImagesVars = [{
+  images: [{
+    name: "test_name",
+    url: "www.xxxx.yyy",
+  }]
+}]
+
 export const queryProductAndOrderVars = [{
   product_id: '1'
 },
@@ -16,6 +23,13 @@ export const queryPrice = `query {
     name
     price
     category
+  }
+}`
+
+export const queryImages = `query {
+  getImages(images: $images) {
+    _id
+    images
   }
 }`
 

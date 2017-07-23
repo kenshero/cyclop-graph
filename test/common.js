@@ -6,11 +6,14 @@ import {
   replaceVariablestoDoc,
   processMapVars,
   isMatchVars,
-  findMatchVariable
+  findMatchVariable,
+  JsonToJsObj
 } from '../src/common'
 import {
   queryPrice,
+  queryImages,
   queryPriceVars,
+  queryImagesVars,
   queryProductAndOrder,
   queryProductAndOrderVars
 } from './data/CommonData'
@@ -22,6 +25,13 @@ test('test mapDocWithVariables Single Field', (t) => {
   t.equal(actual, expected)
   t.end()
 });
+
+// test('test mapDocWithVariables Single Field Test Var Object', (t) => {
+//   const actual = mapDocWithVariables(queryImages, queryImagesVars)
+//   const expected = 'query {\n  getImages(images: [{name: "test_name", url: "www.xxxx.yyy"}]) {\n    _id\n    images  }\n}'
+//   t.equal(actual, expected)
+//   t.end()
+// });
 
 test('test mapDocWithVariables Multiple Field', (t) => {
   const actual = mapDocWithVariables(queryProductAndOrder, queryProductAndOrderVars)
@@ -68,6 +78,31 @@ test('test processMapVars', (t) => {
   const varsFromDocument = ['price: $price']
   const actual = processMapVars(varsFromDocument, queryPriceVars)
   const expected = ['price: 2000']
+  t.deepEqual(actual, expected)
+  t.end()
+});
+
+test('test processMapVars type Object', (t) => {
+  const varsFromDocument = ['images: $images']
+  const actual = processMapVars(varsFromDocument, queryImagesVars)
+  const expected = ['images: [{name:"test_name",url:"www.xxxx.yyy"}]']
+  t.deepEqual(actual, expected)
+  t.end()
+});
+
+test('test JsonToJsObj', (t) => {
+  // const jsonData = JSON.stringify([{name:"test_name",url:"www.xxxx.yyy"}])
+  const jsonData = {name:"test_name",url:"www.xxxx.yyy"}
+  const actual = JsonToJsObj(jsonData)
+  const expected = `{name:"test_name",url:"www.xxxx.yyy"}`
+  t.deepEqual(actual, expected)
+  t.end()
+});
+
+test('test ArrayOfJsonToJsObj', (t) => {
+  const jsonData = [{name:"test_name",url:"www.xxxx.yyy"},{name:"test_name2",url:"www.xxxx.yyy2"}]
+  const actual = JsonToJsObj(jsonData)
+  const expected = `[{name:"test_name",url:"www.xxxx.yyy"},{name:"test_name2",url:"www.xxxx.yyy2"}]`
   t.deepEqual(actual, expected)
   t.end()
 });
